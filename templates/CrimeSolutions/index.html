@@ -1,0 +1,35 @@
+{% extends "CrimeSolutions/base.html" %}
+
+{% block title %}
+    CS-Act Index
+{% endblock %}
+
+{% block body %}
+    <br>
+<div class="container is-fluid">
+    <div class="tile is-ancestor">
+        <div class="tile is-4 is-vertical is-parent">
+            <div class="tile is-child box">
+                <h2 class="title has-text-black-ter">See Crimes Map:</h2>
+                    <a class="button is-primary" href="{% url 'idx_map' %}">Map</a>
+            </div>
+            <div class="tile is-child box">
+                <p class="title has-text-black-ter">Report an Activity: </p>
+                <a class="button is-info" href="{% url 'report' %}">Go to the report page.</a>
+            </div>
+        </div>
+        <div class="tile is-parent">
+            <div class="tile is-child box">
+                <h1 class="title has-text-black-ter">Activity Index: </h1>
+                <ol type="1">
+                    {% for activity in activities %}
+                        <li>
+                            <a href="{% url 'activity' activity.id %}">    {{ activity }}</a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

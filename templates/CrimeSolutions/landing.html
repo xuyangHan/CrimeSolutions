@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home | CrimeSolutions</title>
+    <link rel="shortcut icon" href="/static/imgs/logo2.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <!-- Bulma Version 0.7.2-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/landing.css">
+</head>
+
+<body>
+<section class="hero is-info is-fullheight">
+    <div class="hero-head">
+
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+
+                    <a class="navbar-item" href="{% url 'landing' %}"
+                       style="font-weight: 600; font-size: 200%;">CrimeSolutions</a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                       data-target="navMenu">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                <div class="navbar-menu" id="navMenu">
+                    <div class="navbar-start">
+                        <a class="navbar-item" href="{% url 'index' %}">Index </a>
+                        <a class="navbar-item" href="{% url 'report' %}">Report Crimes </a>
+                        <a class="navbar-item" href="{% url 'idx_map' %}">Crime Map </a>
+                        <a class="navbar-item" href="https://xuyanghan.github.io/">About Me</a>
+                    </div>
+                    <div class="navbar-end">
+                        {% if user.is_authenticated %}
+                            <a class="navbar-item" href="{% url 'user' %}">
+                                Hello, {{ user.last_name }}
+                            </a>
+                            <a class="navbar-item" href="{% url 'logout' %}">Sign Out</a>
+                        {% else %}
+                            <a class="navbar-item" href="{% url 'login' %}">Log In </a>
+                            <a class="navbar-item" href="{% url 'signup' %}">Sign Up </a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-6 is-offset-3">
+                    <h1 class="title">
+                        Crime Prevention Project <span class="subtitle has-text-danger">[Web-Portal]</span>
+                    </h1>
+                    <h2 class="subtitle has-text-weight-bold">
+                        Crowd-Sourced Crime Reporting Platform in Toronto Area
+                    </h2>
+                    <p class="cc has-text-black-bis has-text-weight-semibold">
+                        CrimeSolutions is a platform for crime reporting to supplement crime activity databases.
+                        This platform provides online access, visualization, spatial analysis and data sharing services
+                        of Crowd-Sourced Crime data to give perspectives on crime patterns in Toronto areas.
+                        The project is aimed at contributing to social science research on crimes and crime prevention.
+                        We trust this platform will be helpful to our targeted audience including, but not limited to,
+                        police officers, local communities, governments, and researchers.
+                        Your report is very valuable. See something, say something!
+                    </p>
+                    <br>
+                    <br>
+                    <p class="cc-author has-text-white-bis has-text-weight-semibold">
+                        Chief in Project: Xuyang Han <br>
+                        Project Instructor: Prof. Jadidi <br>
+                        CrimeSolutions-WEB System Design and Development: Xuyang Han<br>
+                    </p>
+                    <br>
+                    <a class="button is-danger" href="{% url 'idx_map' %}">Go to Crime Map.</a>
+
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="cc-author">
+                        <p style="line-height:7px;">
+                            ESS - 5010 ©2018, York University. All right reserved. Built by Xuyang Han.version 1.1
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

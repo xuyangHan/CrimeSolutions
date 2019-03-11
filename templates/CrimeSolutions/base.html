@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+
+    <title>{% block title %}
+    {% endblock %}</title>
+<link rel="shortcut icon" href="/static/imgs/logo2.jpg" type="image/x-icon">
+
+    <div class="container">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'landing' %}">
+                <img src="/static/imgs/logo2.jpg" width="35" height="28">
+            </a>
+            <a class="navbar-item" href="{% url 'landing' %}"
+               style="font-weight: 600; font-size: 200%;">CrimeSolutions</a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+               data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'index' %}">Index </a>
+                <a class="navbar-item" href="{% url 'report' %}">Report Crimes </a>
+                <a class="navbar-item" href="{% url 'idx_map' %}">Crime Map </a>
+                <a class="navbar-item" href="https://xuyanghan.github.io/">About Me</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {% if user.is_authenticated %}
+                            <a class="button is-info is-outlined" href="{% url 'user' %}">
+                                Hello, {{ user.last_name }}
+                            </a>
+                            <a class="button is-primary" href="{% url 'logout' %}"><strong>Sign Out</strong></a>
+                        {% else %}
+                            <a class="button is-info is-outlined" href="{% url 'login' %}">
+                                Log in
+                            </a>
+                            <a class="button is-primary" href="{% url 'signup' %}">
+                                <strong>Sign up</strong>
+                            </a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+    <style>{% block extra_styles %}{% endblock %}</style>
+</head>
+<body>
+<section class="hero is-success is-fullheight">
+<div class="container">
+    {% block body %}
+    {% endblock %}
+</div>
+</section>
+</body>
+</html>

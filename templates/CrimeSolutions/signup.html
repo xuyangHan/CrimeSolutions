@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Signup | CrimeSolutions</title>
+    <link rel="shortcut icon" href="/static/imgs/logo2.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <!-- Bulma Version 0.7.2-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+</head>
+
+<body>
+<div class="container">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'landing' %}">
+                <img src="/static/imgs/logo2.jpg" width="35" height="28">
+            </a>
+            <a class="navbar-item" href="{% url 'landing' %}"
+               style="font-weight: 600; font-size: 200%;">CrimeSolutions</a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+               data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'index' %}">Index </a>
+                <a class="navbar-item" href="{% url 'report' %}">Report Crimes </a>
+                <a class="navbar-item" href="{% url 'idx_map' %}">Crime Map </a>
+                <a class="navbar-item" href="https://xuyanghan.github.io/">About Me</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-info is-outlined" href="{% url 'login' %}">
+                            Log in
+                        </a>
+                        <a class="button is-primary" href="{% url 'signup' %}">
+                            <strong>Sign up</strong>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<section class="hero is-success is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-white-bis">Sign up </h3>
+                <div class="box">
+                    <form action="{% url 'signup' %}" method="post">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul class="messages has-text-danger">
+                                {% for message in messages %}
+                                    <li class="{{ message.tags }}">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="label is-normal">Username: </label>
+                                <input class="input is-medium" type="text" placeholder="Your Username" name="username">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="label is-normal">First Name: </label>
+                                <input class="input is-medium" type="text" placeholder="Your First Name"
+                                       name="first_name">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="label is-normal">Last Name: </label>
+                                <input class="input is-medium" type="text" placeholder="Your Last Name"
+                                       name="last_name">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="label is-normal" for="email">Your Email Address: </label>
+                                <input class="input is-medium" type="email" placeholder="Your Email"
+                                       name="email" id="email" onkeyup="checkEmail(); return false;">
+                                <span id="confirmEmail" class="confirmEmail"></span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="label is-normal" for="pass1">Set Your Password: </label>
+                                <input class="input is-medium" type="password" placeholder="Your Password"
+                                       name="password1"
+                                       id="pass1">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+
+                                <label class="label is-normal" for="pass2">Confirm Your Password: </label>
+                                <input class="input is-medium" type="password" placeholder="Confirm Your Password"
+                                       name="password2" id="pass2" onkeyup="checkPass(); return false;">
+                                <span id="confirmMessage" class="confirmMessage"></span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                Remember me
+                            </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a class="has-text-info has-text-right" href="{% url 'login' %}">Already registered?</a>
+                        </div>
+
+                        <button class="button is-block is-info is-large is-fullwidth" type="submit">Sign Up</button>
+                    </form>
+                </div>
+                <p class="has-text-white-bis">
+                    <a>Need Help?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+<script>
+    function checkPass() {
+        //Store the password field objects into variables ...
+        let pass1 = document.getElementById('pass1');
+        let pass2 = document.getElementById('pass2');
+        //Store the Confimation Message Object ...
+        let message = document.getElementById('confirmMessage');
+        //Set the colors we will be using ...
+        let goodColor = "#66cc66";
+        let badColor = "#ff6666";
+        //Compare the values in the password field
+        //and the confirmation field
+        if (pass1.value === pass2.value) {
+            //The passwords match.
+            //Set the color to the good color and inform
+            //the user that they have entered the correct password
+            pass2.style.backgroundColor = goodColor;
+            message.style.color = goodColor;
+            message.innerHTML = "Passwords Match!"
+        } else {
+            //The passwords do not match.
+            //Set the color to the bad color and
+            //notify the user.
+            pass2.style.backgroundColor = badColor;
+            message.style.color = badColor;
+            message.innerHTML = "Passwords Do Not Match!"
+        }
+    }
+
+    function checkEmail() {
+        //Store the email field objects into variables ...
+        let email = document.getElementById('email');
+        let email_string = $('#email').val();
+
+        //Store the Confimation Message Object ...
+        let message = document.getElementById('confirmEmail');
+        //Set the colors we will be using ...
+        let goodColor = "#66cc66";
+        let badColor = "#ff6666";
+
+        //Validate the email in the field
+        //and the confirmation field
+        if (validateEmail(email_string)) {
+            //The email format is right.
+            //Set the color to the good color and inform
+
+            email.style.backgroundColor = goodColor;
+            message.style.color = goodColor;
+            message.innerHTML = "Correct Email Format!"
+        } else {
+            //The passwords do not match.
+            //Set the color to the bad color and
+            //notify the user.
+            email.style.backgroundColor = badColor;
+            message.style.color = badColor;
+            message.innerHTML = "PLease Check Your Email Format!"
+        }
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+</script>
+<script src="/static/js/jquery-1.10.2.js"></script>
+</html>

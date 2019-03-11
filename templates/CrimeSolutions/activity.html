@@ -1,0 +1,47 @@
+{% extends "CrimeSolutions/base.html" %}
+
+{% block title %}
+    Activity {{ activity.id }}
+{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="container is-fluid">
+        <h1 class="title has-text-white-ter">Activity {{ activity.id }}</h1>
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-parent">
+                <div class="tile is-child box">
+                    <p><strong>Name:</strong> {{ activity.act_name }}</p>
+                    <p><strong>Time:</strong> {{ activity.time }}</p>
+                    <p><strong>Location:</strong> {{ activity.location }}</p>
+                    <p><strong>Description:</strong> {{ activity.description }}</p>
+                </div>
+                <div class="tile is-child box">
+                    <p class="title has-text-black-ter is-4">People report it: </p>
+                    <ol type="I">
+                        <ui>{{ activity.report_person }}</ui>
+
+                    </ol>
+                </div>
+                <div class="tile is-child box">
+                    <p class="title has-text-black-ter is-4">Credibility Endorsement: </p>
+                    <ol type="I">
+                        <ui>{{ activity.endorsed_number }} times.</ui>
+
+                    </ol>
+                    <br>
+                    <form action="{% url 'endorse' activity.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="button is-info" type="submit">Endorse the Credibility. </button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <a class="button is-info" href="{% url 'index' %}">Back to full activities list.</a>
+    <br><br>
+    <a class="button is-danger" href="{% url 'idx_map' %}">See Crime on Map.</a>
+{% endblock %}

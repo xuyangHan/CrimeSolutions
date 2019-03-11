@@ -1,0 +1,102 @@
+{% extends "CrimeSolutions/base.html" %}
+
+{% block title %}
+    Report an Activity
+{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="container is-fluid">
+        <div class="box">
+            <h1 class="has-text-black-ter title">Please Report an Activity: </h1>
+            <ul>
+                <form action="{% url 'report' %}" method="post">
+                    {% csrf_token %}
+                    {% if errors %}
+                        <ul class="messages has-text-danger">
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+
+                    {% endif %}
+
+                    <div class="field">
+                        <label class="label">Your name:</label>
+                        <div class="control">
+                            <input class="input" id="first_name" type="text" name="first_name"
+                                   placeholder="your first name">
+                            <input class="input" id="last_name" type="text" name="last_name"
+                                   placeholder="your last name">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Activity Name:</label>
+                        <div class="control">
+                            <input class="input" id="activity_name" type="text" name="activity_name"
+                                   placeholder="activity name">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Occurred Time:</label>
+                        <div class="control">
+                            <input class="input" id="time" type="date" name="time">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Occurred Location's Name:</label>
+                        <div class="control">
+                            <input class="input" id="activity_location" type="text" name="activity_location"
+                                   placeholder="activity location's name">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Detailed Address: </label>
+                        <div class="control">
+                            <input class="input" id="address" type="text" name="address"
+                                   placeholder="Crime Address">
+                        </div>
+                        {#                <label class="label">Latitude: </label>#}
+                        {#                <div class="control">#}
+                        {#                    <input class="input" id="loc_lat" type="number" step="0.000001" name="loc_lat"#}
+                        {#                           placeholder="43.76776">#}
+                        {#                </div>#}
+                        {#                <p class="help">Please be accurate to 0.0001</p>#}
+                        {##}
+                        {#                <label class="label">Longitude: </label>#}
+                        {#                <div class="control">#}
+                        {#                    <input class="input" id="loc_long" type="number" step="0.000001" name="loc_long"#}
+                        {#                           placeholder="-79.50297">#}
+                        {#                </div>#}
+                        {#                <p class="help">Please be accurate to 0.0001</p>#}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Activity Description: </label>
+                        <div class="control">
+                    <textarea class="textarea" id="activity_description" type="text" name="activity_description"
+                              placeholder="activity description"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link" type="submit" value="Report">Submit</button>
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </ul>
+            <br>
+
+            <a class="button is-info" href="{% url 'index' %}">Back to full activities list.</a>
+        </div>
+    </div>
+{% endblock %}

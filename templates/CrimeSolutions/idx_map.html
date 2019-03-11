@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- This stylesheet contains specific styles for displaying the map
+         on this page. Replace it with your own styles as described in the
+         documentation:
+         https://developers.google.com/maps/documentation/javascript/tutorial -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <style media="screen">
+        #map {
+            height: 500px;
+            width: 85%;
+         }
+    </style>
+    <title>Activities on Map</title>
+    <link rel="shortcut icon" href="/static/imgs/logo2.jpg" type="image/x-icon">
+</head>
+<div class="container">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'landing' %}">
+                <img src="/static/imgs/logo2.jpg" width="35" height="28">
+            </a>
+            <a class="navbar-item" href="{% url 'landing' %}"
+               style="font-weight: 600; font-size: 200%;">CrimeSolutions</a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+               data-target="navMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'index' %}">Index </a>
+                <a class="navbar-item" href="{% url 'report' %}">Report Crimes </a>
+                <a class="navbar-item" href="{% url 'idx_map' %}">Crime Map </a>
+                <a class="navbar-item" href="http://xuyanghan.github.io/">About Me</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {% if user.is_authenticated %}
+                            <a class="button is-info is-outlined" href="{% url 'user' %}">
+                                Hello, {{ user.last_name }}
+                            </a>
+                            <a class="button is-primary" href="{% url 'logout' %}"><strong>Sign Out</strong></a>
+                        {% else %}
+                            <a class="button is-info is-outlined" href="{% url 'login' %}">
+                                Log in
+                            </a>
+                            <a class="button is-primary" href="{% url 'signup' %}">
+                                <strong>Sign up</strong>
+                            </a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<body>
+<section class="hero is-success is-fullheight">
+    <div class="container">
+        <br>
+        <div class="container is-fluid">
+            <div class="box">
+                <div class="container">
+                    <h1 class="has-text-black-ter title">Activities on Map: </h1>
+                    <div id="map"></div>
+                    <br>
+                    <a class="button is-info" href="{% url 'index' %}">Back to full activities list.</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function initMap() {
+        var homeLatLng = {lat: 43.767760, lng: -79.502970};
+
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: homeLatLng,
+            zoom: 12
+        });
+
+        var act = '{{ activities_json|safe }}'.toString();
+        var lat = 43.767760;
+        var lng = -79.502970;
+        var latLng = {lat: lat, lng: lng};
+
+        var infoWindowOptions = {
+            content: 'Activity!'
+        };
+
+        var obj = JSON.parse(act);
+
+        for (var i = 0; i < Object.keys(obj).length; i++) {
+            lat = obj[i].fields.loc_lat;
+            lng = obj[i].fields.loc_long;
+            latLng = {lat: lat, lng: lng};
+            infoWindowOptions = {
+                content: '<div id="content">' +
+                    '<h1 id="firstHeading" class="subtitle has-text-black-ter is-5">' + obj[i].fields.act_name + '</h1>' +
+                    '<div id="bodyContent">' +
+                    '<li> <strong>Time: </strong> ' + obj[i].fields.time + '</li>' +
+                    '<li> <strong>Location: </strong> ' + obj[i].fields.location + '</li>' +
+                    '<li> <strong>Description: </strong> ' + obj[i].fields.description + '</li>' +
+                    '</div>' +
+                    '</div>'
+            };
+            addMarker(latLng);
+        }
+
+        //Add Marker Function
+        function addMarker(coords) {
+            // Create a marker and set its position.
+            var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+            var marker = new google.maps.Marker({
+                map: map,
+                position: coords,
+                icon: image,
+            });
+
+            var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+            google.maps.event.addListener(marker, 'click', function (e) {
+                infoWindow.open(map, marker);
+            });
+
+
+        }
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy381OfNCXjdUqgLLMYY7AtESnTjrS5eU&callback=initMap"
+        async defer></script>
+</body>
+</html>
