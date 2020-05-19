@@ -1,0 +1,42 @@
+html, body {
+    font-family: 'Open Sans', serif;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+
+.hero .nav, .hero.is-success .nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.box {
+    margin-top: 5rem;
+}
+
+
+
+
+input {
+    font-weight: 300;
+}
+
+p {
+    font-weight: 700;
+}
+
+p.subtitle {
+    padding-top: 1rem;
+}
+
+.hero.is-success {
+    background-image: url(../imgs/background.JPG);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#helping {
+    text-shadow: 1px 1px black;
+}
