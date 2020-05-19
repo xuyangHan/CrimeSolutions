@@ -1,8 +1,0 @@
-.hero.is-success {
-    /*background: #ECF0F3;*/
-    background-image: url(../imgs/background.JPG);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
