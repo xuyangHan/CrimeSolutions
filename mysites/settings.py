@@ -26,7 +26,8 @@ SECRET_KEY = 'a5mw=d-gt+5p+6-qr2m+8oww&jrf47k0+ip!c8lig4wqr-jfrj'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'ec2-18-218-16-108.us-east-2.compute.amazonaws.com'
+    'ec2-18-218-16-108.us-east-2.compute.amazonaws.com',
+    '127.0.0.1'
 ]
 
 
@@ -121,7 +122,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_resources')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
