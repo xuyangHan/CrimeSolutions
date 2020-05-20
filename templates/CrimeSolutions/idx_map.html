@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
          documentation:
          https://developers.google.com/maps/documentation/javascript/tutorial -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <style media="screen">
         #map {
             height: 500px;
