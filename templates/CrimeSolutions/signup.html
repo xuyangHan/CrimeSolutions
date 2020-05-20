@@ -13,7 +13,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 </head>
+<style>
+    html, body {
+    font-family: 'Open Sans', serif;
+    font-size: 16px;
+    font-weight: 300;
+}
 
+
+.hero .nav, .hero.is-success .nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.box {
+    margin-top: 5rem;
+}
+
+
+
+
+input {
+    font-weight: 300;
+}
+
+p {
+    font-weight: 700;
+}
+
+p.subtitle {
+    padding-top: 1rem;
+}
+
+.hero.is-success {
+    background-image: url('https://images.pexels.com/photos/70577/sunset-birds-flying-sky-70577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#helping {
+    text-shadow: 1px 1px black;
+}
+</style>
 <body>
 <div class="container">
     <nav class="navbar" role="navigation" aria-label="main navigation">
